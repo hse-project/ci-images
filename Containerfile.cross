@@ -1,0 +1,37 @@
+FROM docker.io/debian:11
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+ARG crossArch
+
+RUN dpkg --add-architecture ${crossArch}
+RUN apt-get -y update
+RUN apt-get -y upgrade
+RUN apt-get -y autoremove
+RUN apt-get -y install --no-install-recommends \
+    autoconf \
+    automake \
+    cmake \
+    crossbuild-essential-${crossArch} \
+    default-jdk \
+    gawk \
+    gcc \
+    gcc-${crossArch}-linux-gnu \
+    g++ \
+    g++-${crossArch}-linux-gnu \
+    git \
+    libncurses-dev:${crossArch} \
+    libpython3-dev:${crossArch} \
+    libtool \
+    make \
+    maven \
+    ninja-build \
+    pkg-config \
+    python3 \
+    python3-pip \
+    qemu \
+    qemu-user-static
+RUN python3 -m pip install \
+    Cython \
+    meson==0.62.2
+RUN ulimit -c unlimited
