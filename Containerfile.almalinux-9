@@ -1,0 +1,30 @@
+FROM docker.io/almalinux:9
+
+RUN dnf install -y dnf-plugins-core epel-release
+RUN dnf config-manager --set-enabled crb
+RUN dnf upgrade -y
+RUN dnf install -y --setopt=install_weak_deps=False \
+    clang \
+    cmake \
+    gcc \
+    gcc-c++ \
+    git \
+    java-1.8.0-openjdk-devel \
+    libbsd-devel \
+    libbson-devel \
+    libcurl-devel \
+    libmicrohttpd-devel \
+    libpmem-devel \
+    libyaml-devel \
+    maven \
+    mongo-c-driver-devel \
+    ncurses-devel \
+    ninja-build \
+    pkgconf \
+    python3-devel \
+    python3-pip \
+    userspace-rcu-devel
+RUN python3 -m pip install \
+    Cython \
+    meson==0.62.2
+RUN ulimit -c unlimited

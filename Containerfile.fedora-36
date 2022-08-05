@@ -1,0 +1,28 @@
+FROM docker.io/fedora:36
+
+RUN dnf upgrade -y
+RUN dnf install -y --setopt=install_weak_deps=False \
+    clang \
+    cmake \
+    doxygen \
+    gcc \
+    gcc-c++ \
+    git \
+    HdrHistogram_c-devel \
+    java-latest-openjdk-devel \
+    libbsd-devel \
+    libbson-devel \
+    libcurl-devel \
+    libmicrohttpd-devel \
+    libpmem-devel \
+    libyaml-devel \
+    maven \
+    mongo-c-driver-devel \
+    ncurses-devel \
+    ninja-build \
+    python3-Cython \
+    python3-devel \
+    python3-pip \
+    userspace-rcu-devel
+RUN python3 -m pip install meson==0.62.2
+RUN ulimit -c unlimited
