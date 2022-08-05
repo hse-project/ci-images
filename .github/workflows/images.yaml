@@ -119,7 +119,7 @@ jobs:
             cmakeVersion=${{ env.CMAKE_VERSION }}
             crossArch=${{ env.CROSS_ARCH }}
           load: true
-          tags: ${{ github.repository }}-${{ steps.determine-branch.outputs.branch }}:${{ matrix.tag }}
+          tags: ${{ github.repository }}/ci-${{ steps.determine-branch.outputs.branch }}:${{ matrix.tag }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -128,7 +128,7 @@ jobs:
           docker run --rm --env CI=$CI --env CROSS_ARCH=$CROSS_ARCH \
             --interactive --workdir /root --volume $GITHUB_WORKSPACE:/root \
             --user "$(id -u):$(id -g)" \
-            ${{ github.repository }}-${{ steps.determine-branch.outputs.branch }}:${{ matrix.tag }} \
+            ${{ github.repository }}/ci-${{ steps.determine-branch.outputs.branch }}:${{ matrix.tag }} \
             ./scripts/test.sh
 
       - name: Login to GitHub Package Registry
@@ -148,7 +148,7 @@ jobs:
             cmakeVersion=${{ env.CMAKE_VERSION }}
             crossArch=${{ env.CROSS_ARCH }}
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ github.repository }}-${{ steps.determine-branch.outputs.branch }}:${{ matrix.tag }}
+          tags: ${{ github.repository }}/ci-${{ steps.determine-branch.outputs.branch }}:${{ matrix.tag }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
