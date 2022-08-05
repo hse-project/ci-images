@@ -142,7 +142,7 @@ jobs:
         if: ${{ github.event_name != 'pull_request' }}
         with:
           push: true
-          registry: ghcr.io
+          context: ${{ github.workspace }}
           tags: ${{ github.repository }}-${{ steps.determine-branch.outputs.branch }}:${{ matrix.tag }}
 
       - uses: actions/upload-artifact@v3
