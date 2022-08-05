@@ -32,6 +32,8 @@ permissions:
 jobs:
   images:
     runs-on: ubuntu-latest
+    env:
+      CMAKE_VERSION: "3.23.3"
     strategy:
       fail-fast: false
       matrix:
@@ -114,7 +116,7 @@ jobs:
           context: ${{ github.workspace }}
           file: ${{ steps.export-filename.outputs.filename }}
           build-args: |
-            cmakeVersion=3.23.3
+            cmakeVersion=${{ env.CMAKE_VERSION }}
             crossArch=${{ env.CROSS_ARCH }}
           load: true
           tags: ${{ github.repository }}-${{ steps.determine-branch.outputs.branch }}:${{ matrix.tag }}
@@ -139,11 +141,16 @@ jobs:
 
       - name: Push to GitHub Package Registry
         uses: docker/build-push-action@v3
-        if: ${{ github.event_name != 'pull_request' }}
         with:
-          push: true
           context: ${{ github.workspace }}
+          file: ${{ steps.export-filename.outputs.filename }}
+          build-args: |
+            cmakeVersion=${{ env.CMAKE_VERSION }}
+            crossArch=${{ env.CROSS_ARCH }}
+          push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ github.repository }}-${{ steps.determine-branch.outputs.branch }}:${{ matrix.tag }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
       - uses: actions/upload-artifact@v3
         if: ${{ failure() }}
