@@ -38,7 +38,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        tag:
+        image:
           - almalinux-8
           - almalinux-9
           - cross-s390x
@@ -62,7 +62,7 @@ jobs:
       - name: Export image
         id: export-image
         run: |
-          echo "::set-output name=image::${{ env.REGISTRY }}/${{ github.repository_owner }}/ci-${{ matrix.tag }}:${{ steps.determine-branch.outputs.branch }}"
+          echo "::set-output name=image::${{ env.REGISTRY }}/${{ github.repository }}/${{ matrix.image }}:${{ steps.determine-branch.outputs.branch }}"
 
       - name: Checkout ci-images
         uses: actions/checkout@v3
@@ -92,21 +92,21 @@ jobs:
         uses: actions/cache@v3
         with:
           path: hse/subprojects/packagecache
-          key: meson-packagecache-${{ matrix.tag }}-${{ steps.determine-branch.outputs.branch }}-${{ hashFiles('hse/subprojects/*.wrap') }}
+          key: meson-packagecache-${{ matrix.image }}-${{ steps.determine-branch.outputs.branch }}-${{ hashFiles('hse/subprojects/*.wrap') }}
 
       - name: Export CROSS_ARCH
-        if: ${{ startsWith(matrix.tag, 'cross') }}
+        if: ${{ startsWith(matrix.image, 'cross') }}
         run: |
-          tag=${{ matrix.tag }}
+          tag=${{ matrix.image }}
           echo "CROSS_ARCH=${tag##*-}" >> "$GITHUB_ENV"
 
       - name: Export filename
         id: export-filename
         run: |
           if [ -z "${CROSS_ARCH}" ]; then
-            echo ::set-output name=filename::Containerfile.${{ matrix.tag }}
+            echo ::set-output name=filename::Containerfile.${{ matrix.image }}
           else
-            tag=${{ matrix.tag }}
+            tag=${{ matrix.image }}
             echo ::set-output name=filename::Containerfile.${tag%%-*}
           fi
 
@@ -161,6 +161,6 @@ jobs:
       - uses: actions/upload-artifact@v3
         if: ${{ failure() }}
         with:
-          name: ${{ github.job }}-${{ matrix.tag }}
+          name: ${{ github.job }}-${{ matrix.image }}
           path: |
             builddir/meson-logs/
