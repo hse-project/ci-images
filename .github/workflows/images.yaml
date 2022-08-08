@@ -163,4 +163,4 @@ jobs:
         with:
           name: ${{ github.job }}-${{ matrix.image }}
           path: |
-            builddir/meson-logs/
+            hse/builddir/meson-logs/
