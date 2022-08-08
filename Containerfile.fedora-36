@@ -3,6 +3,7 @@ FROM docker.io/fedora:36
 RUN dnf upgrade -y
 RUN dnf install -y --setopt=install_weak_deps=False \
     clang \
+    clang-tools-extra \
     cmake \
     doxygen \
     gcc \
