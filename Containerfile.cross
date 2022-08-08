@@ -30,7 +30,9 @@ RUN apt-get -y install --no-install-recommends \
     python3 \
     python3-pip \
     qemu \
-    qemu-user-static
+    qemu-user-static \
+    apt-file
+RUN apt-file update && apt-file search s390x-linux-gnu-pkg-config
 RUN python3 -m pip install \
     Cython \
     meson==0.62.2
