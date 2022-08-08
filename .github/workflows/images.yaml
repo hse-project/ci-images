@@ -46,6 +46,7 @@ jobs:
           - ubuntu-18.04
           - ubuntu-20.04
           - ubuntu-22.04
+        toolchain: [gcc, clang]
 
     steps:
       - name: Determine branch
@@ -87,6 +88,12 @@ jobs:
           repository: hse-project/hse-python
           path: hse/subprojects/hse-python
           ref: ${{ steps.determine-branch.outputs.branch }}
+
+      - name: Setup clang toolchain
+        if: ${{ matrix.toolchain == 'clang' }}
+        run: |
+          echo "CC=clang" >> "$GITHUB_ENV"
+          echo "CXX=clang++" >> "$GITHUB_ENV"
 
       - name: Cache Meson packagecache
         uses: actions/cache@v3
@@ -161,6 +168,6 @@ jobs:
       - uses: actions/upload-artifact@v3
         if: ${{ failure() }}
         with:
-          name: ${{ github.job }}-${{ matrix.image }}
+          name: ${{ github.job }}-${{ matrix.image }}-${{ matrix.toolchain }}
           path: |
             builddir/meson-logs/
