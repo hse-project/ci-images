@@ -26,7 +26,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        tag:
+        image:
           - almalinux-8
           - almalinux-9
           - cross-s390x
@@ -37,4 +37,4 @@ jobs:
 
     steps:
       - run: |
-          echo "Skipping ${{ github.workflow }}/${{ github.job }}"
+          echo "Skipping ${{ github.workflow }}/${{ github.job }}/${{ matrix.image }}"
