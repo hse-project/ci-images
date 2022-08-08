@@ -20,6 +20,7 @@ RUN apt-get -y install --no-install-recommends \
     libmicrohttpd-dev \
     libmongoc-dev \
     libncurses-dev \
+    libpmem-dev \
     liburcu-dev \
     libyaml-dev \
     maven \
