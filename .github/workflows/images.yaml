@@ -30,7 +30,7 @@ permissions:
   packages: write
 
 jobs:
-  images:
+  image:
     runs-on: ubuntu-latest
     env:
       REGISTRY: ghcr.io
