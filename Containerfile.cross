@@ -21,6 +21,7 @@ RUN apt-get -y install --no-install-recommends \
     g++-${crossArch}-linux-gnu \
     git \
     libncurses-dev:${crossArch} \
+    libtcmalloc-minimal4:${crossArch} \
     libpython3-dev:${crossArch} \
     libtool \
     make \

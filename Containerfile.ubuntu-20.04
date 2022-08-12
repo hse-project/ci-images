@@ -21,6 +21,7 @@ RUN apt-get -y install --no-install-recommends \
     libmongoc-dev \
     libncurses-dev \
     libpmem-dev \
+    libtcmalloc-minimal4 \
     liburcu-dev \
     libyaml-dev \
     maven \

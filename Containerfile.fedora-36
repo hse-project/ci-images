@@ -10,6 +10,7 @@ RUN dnf install -y --setopt=install_weak_deps=False \
     gcc \
     gcc-c++ \
     git \
+    gperftools-devel \
     HdrHistogram_c-devel \
     java-latest-openjdk-devel \
     libasan \
