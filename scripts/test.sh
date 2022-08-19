@@ -9,7 +9,7 @@ if [ -n "${CROSS_ARCH}" ]; then
 fi
 
 # shellcheck disable=SC2086
-meson builddir hse --fatal-meson-warnings --werror ${cross_args} \
+meson setup builddir hse --fatal-meson-warnings --werror ${cross_args} \
     -Dbindings=all -Dtools=enabled
 ninja -C builddir
 
