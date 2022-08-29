@@ -12,6 +12,7 @@ RUN apt-get -y install --no-install-recommends \
     gcc \
     g++ \
     git \
+    jq \
     libbsd-dev \
     libbson-dev \
     libcurl4-openssl-dev \
