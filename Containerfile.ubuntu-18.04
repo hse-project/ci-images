@@ -15,6 +15,7 @@ RUN apt-get -y install --no-install-recommends \
     gcc \
     g++ \
     git \
+    jq \
     libbson-dev \
     libcurl4-openssl-dev \
     libmicrohttpd-dev \
