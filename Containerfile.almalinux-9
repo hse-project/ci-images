@@ -1,5 +1,7 @@
 FROM docker.io/almalinux:9
 
+ARG mesonVersion
+
 RUN dnf install -y dnf-plugins-core epel-release
 RUN dnf config-manager --set-enabled crb
 RUN dnf upgrade -y
@@ -27,5 +29,5 @@ RUN dnf install -y --setopt=install_weak_deps=False \
     userspace-rcu-devel
 RUN python3 -m pip install \
     Cython \
-    meson==0.62.2
+    meson==${mesonVersion}
 RUN ulimit -c unlimited

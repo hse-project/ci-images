@@ -1,5 +1,7 @@
 FROM docker.io/fedora:36
 
+ARG mesonVersion
+
 RUN dnf upgrade -y
 RUN dnf install -y --setopt=install_weak_deps=False \
     cjson-devel \
@@ -32,5 +34,5 @@ RUN dnf install -y --setopt=install_weak_deps=False \
     python3-pip \
     userspace-rcu-devel \
     which
-RUN python3 -m pip install meson==0.62.2
+RUN python3 -m pip install meson==${mesonVersion}
 RUN ulimit -c unlimited
