@@ -1,5 +1,7 @@
 FROM docker.io/ubuntu:22.04
 
+ARG mesonVersion
+
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get -y update
@@ -30,5 +32,5 @@ RUN apt-get -y install --no-install-recommends \
     python3-pip
 RUN python3 -m pip install \
     Cython \
-    meson==0.62.2
+    meson==${mesonVersion}
 RUN ulimit -c unlimited

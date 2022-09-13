@@ -33,8 +33,9 @@ jobs:
   image:
     runs-on: ubuntu-latest
     env:
-      REGISTRY: ghcr.io
       CMAKE_VERSION: "3.23.3"
+      MESON_VERSION: "0.63.2"
+      REGISTRY: ghcr.io
     strategy:
       fail-fast: false
       matrix:
@@ -124,6 +125,7 @@ jobs:
           build-args: |
             cmakeVersion=${{ env.CMAKE_VERSION }}
             crossArch=${{ env.CROSS_ARCH }}
+            mesonVersion=${{ env.MESON_VERSION }}
           load: true
           tags: ${{ steps.export-image.outputs.image }}
           cache-from: type=gha
@@ -153,6 +155,7 @@ jobs:
           build-args: |
             cmakeVersion=${{ env.CMAKE_VERSION }}
             crossArch=${{ env.CROSS_ARCH }}
+            mesonVersion=${{ env.MESON_VERSION }}
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.export-image.outputs.image }}
           cache-from: type=gha

@@ -3,6 +3,7 @@ FROM docker.io/debian:11
 ENV DEBIAN_FRONTEND=noninteractive
 
 ARG crossArch
+ARG mesonVersion
 
 RUN dpkg --add-architecture ${crossArch}
 RUN apt-get -y update
@@ -33,5 +34,5 @@ RUN apt-get -y install --no-install-recommends \
     qemu-user-static
 RUN python3 -m pip install \
     Cython \
-    meson==0.62.2
+    meson==${mesonVersion}
 RUN ulimit -c unlimited

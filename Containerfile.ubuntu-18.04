@@ -1,8 +1,9 @@
 FROM docker.io/ubuntu:18.04
 
-ENV DEBIAN_FRONTEND=noninteractive
-
 ARG cmakeVersion
+ARG mesonVersion
+
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get -y update
 RUN apt-get -y upgrade
@@ -37,7 +38,7 @@ RUN update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-10 \
     1
 RUN update-alternatives --set clang++ /usr/bin/clang++-10
 RUN python3 -m pip install Cython
-RUN python3.7 -m pip install meson==0.62.2
+RUN python3.7 -m pip install meson==${mesonVersion}
 RUN mkdir -p /usr/local
 RUN curl -sSLo /tmp/cmake.tar.gz \
     https://github.com/Kitware/CMake/releases/download/v${cmakeVersion}/cmake-${cmakeVersion}-linux-x86_64.tar.gz
