@@ -19,6 +19,7 @@ RUN apt-get -y install --no-install-recommends \
     jq \
     libbson-dev \
     libcurl4-openssl-dev \
+    libevent-dev \
     libmicrohttpd-dev \
     libmongoc-dev \
     libncurses-dev \
