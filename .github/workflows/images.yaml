@@ -53,17 +53,17 @@ jobs:
         id: determine-branch
         run: |
           if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
-            echo "::set-output name=branch::$GITHUB_BASE_REF"
+            echo "branch=$GITHUB_BASE_REF" >> "$GITHUB_OUTPUT"
           elif [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
-            echo ::set-output name=branch::${{ github.event.inputs.branch }}
+            echo "branch=${{ github.event.inputs.branch }}" >> "$GITHUB_OUTPUT"
           else
-            echo "::set-output name=branch::$GITHUB_REF_NAME"
+            echo "branch=$GITHUB_REF_NAME" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Export image
         id: export-image
         run: |
-          echo "::set-output name=image::${{ env.REGISTRY }}/${{ github.repository }}/${{ matrix.image }}:${{ steps.determine-branch.outputs.branch }}"
+          echo "image=$REGISTRY/$GITHUB_REPOSITORY/${{ matrix.image }}:${{ steps.determine-branch.outputs.branch }}" >> "$GITHUB_OUTPUT"
 
       - name: Checkout ci-images
         uses: actions/checkout@v3
@@ -105,10 +105,10 @@ jobs:
         id: export-filename
         run: |
           if [ -z "${CROSS_ARCH}" ]; then
-            echo ::set-output name=filename::Containerfile.${{ matrix.image }}
+            echo "filename=Containerfile.${{ matrix.image }}" >> "$GITHUB_OUTPUT"
           else
             tag=${{ matrix.image }}
-            echo ::set-output name=filename::Containerfile.${tag%%-*}
+            echo "filename=Containerfile.${tag%%-*}" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Set up QEMU
