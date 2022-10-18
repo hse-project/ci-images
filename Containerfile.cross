@@ -24,7 +24,6 @@ RUN apt-get -y install --no-install-recommends \
     libncurses-dev:${crossArch} \
     libpython3-dev:${crossArch} \
     libtool \
-    lsb-release \
     make \
     maven \
     ninja-build \
