@@ -31,6 +31,7 @@ RUN dnf install -y --setopt=install_weak_deps=False \
     python3-Cython \
     python3-devel \
     python3-pip \
+    redhat-lsb-core \
     userspace-rcu-devel \
     which
 RUN python3 -m pip install meson==${mesonVersion}
