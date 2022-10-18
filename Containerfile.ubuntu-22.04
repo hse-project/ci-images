@@ -23,7 +23,6 @@ RUN apt-get -y install --no-install-recommends \
     libncurses-dev \
     libpmem-dev \
     liburcu-dev \
-    lsb-core \
     maven \
     ninja-build \
     openjdk-8-jdk \
