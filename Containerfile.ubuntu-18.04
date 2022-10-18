@@ -22,6 +22,7 @@ RUN apt-get -y install --no-install-recommends \
     libevent-dev \
     libmongoc-dev \
     libncurses-dev \
+    liblz4-dev \
     libpmem-dev \
     liburcu-dev \
     maven \
