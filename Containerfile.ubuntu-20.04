@@ -20,6 +20,7 @@ RUN apt-get -y install --no-install-recommends \
     libbson-dev \
     libcurl4-openssl-dev \
     libevent-dev \
+    liblz4-dev \
     libmongoc-dev \
     libncurses-dev \
     libpmem-dev \
