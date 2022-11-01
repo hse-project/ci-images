@@ -8,6 +8,7 @@ RUN dnf upgrade -y
 RUN dnf install -y --setopt=install_weak_deps=False \
     clang \
     cmake \
+    compiler-rt \
     gcc \
     gcc-c++ \
     git \
