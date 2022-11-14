@@ -34,7 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       CMAKE_VERSION: "3.23.3"
-      MESON_VERSION: "0.63.3"
+      MESON_VERSION: "0.64.1"
       REGISTRY: ghcr.io
     strategy:
       fail-fast: false
