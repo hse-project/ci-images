@@ -74,24 +74,24 @@ jobs:
           echo "image=$REGISTRY/$GITHUB_REPOSITORY/${{ matrix.image }}:${{ steps.determine-branch.outputs.branch }}" >> "$GITHUB_OUTPUT"
 
       - name: Checkout ci-images
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Checkout HSE
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: hse-project/hse
           path: hse
           ref: ${{ steps.determine-branch.outputs.branch }}
 
       - name: Checkout hse-java
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: hse-project/hse-java
           path: hse/subprojects/hse-java
           ref: ${{ steps.determine-branch.outputs.branch }}
 
       - name: Checkout hse-python
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: hse-project/hse-python
           path: hse/subprojects/hse-python
