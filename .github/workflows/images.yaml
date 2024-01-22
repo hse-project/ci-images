@@ -98,7 +98,7 @@ jobs:
           ref: ${{ steps.determine-branch.outputs.branch }}
 
       - name: Cache Meson packagecache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: hse/subprojects/packagecache
           key: meson-packagecache-${{ matrix.image }}-${{ steps.determine-branch.outputs.branch }}-${{ hashFiles('hse/subprojects/*.wrap') }}
